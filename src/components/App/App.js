@@ -9,7 +9,8 @@ import PeoplePage from "../PeoplePage";
 import SwapiService from "../../services/SwapiService";
 
 import ItemList from '../ItemList';
-import PersonDetails from '../PersonDetails'
+import Row from "../Row";
+import ItemDetails, { Record } from "../ItemDetails";
 
 class App extends Component {
   swapiService = new SwapiService();
@@ -40,6 +41,22 @@ class App extends Component {
       <RandomPlanet />
     ) : null;
 
+    const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.swapiService;
+    const personDetails = (
+      <ItemDetails itemId={11} getData={getPerson} getImageURL={getPersonImage}>
+        <Record field='gender' label='Gender'/>
+        <Record field='eyeColor' label='Eye Color'/>
+      </ItemDetails>
+    );
+
+    const starshipDetails = (
+      <ItemDetails itemId={5} getData={getStarship} getImageURL={getStarshipImage}>
+        <Record field='model' label='Model'/>
+        <Record field='length' label='Length'/>
+        <Record field='costInCredits' label='Cost'/>
+      </ItemDetails>
+    );
+
     return (
       <div>
         <Header />
@@ -50,9 +67,11 @@ class App extends Component {
           onClick={this.toggleRandomPlanet}>
           Toggle Random Planet
         </button>
-
+{/*
         <PeoplePage />
-       
+
+*/}
+        <Row left = {starshipDetails} right={personDetails}/>
       </div>
     );
   }

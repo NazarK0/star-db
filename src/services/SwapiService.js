@@ -1,6 +1,7 @@
 export default class SwapiService {
   _proxyurl = "https://cors-anywhere.herokuapp.com/";
   _apiBase = "https://swapi.co/api/";
+  _imageBase = "https://starwars-visualguide.com/assets/img/";
 
   getResource = async url => {
     const response = await fetch(
@@ -44,6 +45,18 @@ export default class SwapiService {
     return this._transformStarship(starship);
   };
 
+  getPersonImage = ({ id }) => {
+    return `${this._imageBase}characters/${id}.jpg`;
+  };
+
+  getStarshipImage = ({ id }) => {
+    return `${this._imageBase}starships/${id}.jpg`;
+  };
+
+  getPlanetImage = ({ id }) => {
+    return `${this._imageBase}planets/${id}.jpg`;
+  };
+
   _extractId(item) {
     const idRegExp = /\/([0-9]+)\/$/;
     return item.url.match(idRegExp)[1];
@@ -65,11 +78,11 @@ export default class SwapiService {
       name: starship.name,
       model: starship.model,
       manufacturer: starship.manufacturer,
-      costInCredits: starship.costInCredits,
+      costInCredits: starship.cost_in_credits,
       length: starship.length,
       crew: starship.crew,
       passengers: starship.passengers,
-      cargoCapacity: starship.cargoCapacity,
+      cargoCapacity: starship.cargo_capacity,
     };
   };
 

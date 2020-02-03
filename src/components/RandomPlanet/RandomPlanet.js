@@ -10,7 +10,7 @@ class RandomPlanet extends Component {
   constructor() {
     super();
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet, 28500);
+    this.interval = setInterval(this.updatePlanet, 65500);
   }
 
   swapiService = new SwapiService();

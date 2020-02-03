@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./PeoplePage.css";
 
 import ItemList from "../ItemList";
-import PersonDetails from "../PersonDetails";
+import PersonDetails from "../ItemDetails";
 import ErrorBoundary from "../ErrorBoundary";
 import SwapiService from "../../services/SwapiService";
 import Row from "../Row";
