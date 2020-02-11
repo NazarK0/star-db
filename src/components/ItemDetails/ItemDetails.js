@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-
-import SwapiService from '../../services/SwapiService';
-
 import './ItemDetails.css';
 
 const Record = ({item, field, label}) => {
-  console.log(item)
   return (
     <li className='list-group-item'>
       <span className='term'>{label} </span>
@@ -23,8 +19,6 @@ class ItemDetails extends Component {
     error: false,
   };
 
-  swapiService = new SwapiService();
-
   onError = () => {
     this.setState({
       error: true,
@@ -36,7 +30,11 @@ class ItemDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.itemId !== prevProps.itemId) {
+    if (
+      this.props.itemId !== prevProps.itemId ||
+      this.props.getData !== prevProps.getData ||
+      this.props.getImageURL !== prevProps.getImageURL
+    ) {
       this.updateItem();
     }
   }
@@ -62,8 +60,6 @@ class ItemDetails extends Component {
       return <span>Select item from a list</span>;
     }
     const { item, image } = this.state;
-    console.log(image);
-
     return (
       <div className='item-details card'>
         <ItemView item={item} image = {image} children={this.props.children} />
